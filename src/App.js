@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    const json = localStorage.getItem("results");
+    const json = sessionStorage.getItem("results");
     const movieResults = JSON.parse(json);
     this.setState({movies: movieResults});
   }
@@ -48,7 +48,7 @@ class App extends Component {
   // which is then stored locally for quick access
   componentDidUpdate = () => {
     const movieString = JSON.stringify(this.state.movies);
-    localStorage.setItem("results", movieString);
+    sessionStorage.setItem("results", movieString);
   }
 
   render() {
