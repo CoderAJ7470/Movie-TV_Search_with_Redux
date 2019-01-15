@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const Movies = (props) => (
     <div className="moviesDiv">
-        {props.movies.map((movie) => {
+        {props.movies && props.movies.map((movie) => {
             return(
                 <div key={movie.imdbID} className="movieCards">
                     {movie.Poster !== "N/A" ? 

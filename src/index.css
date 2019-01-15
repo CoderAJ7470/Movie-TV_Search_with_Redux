@@ -107,6 +107,7 @@ button {
 
 .movieDetails img {
   height: 100%;
+  width: 300px;
 }
 
 .movieSpecs {
