@@ -1,0 +1,75 @@
+.detailsHeader {
+  text-align: center;
+}
+
+.detailsTitle {
+  font-style: italic;
+}
+
+.movieDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 3em;
+}
+
+.movieDetails img {
+  height: 100%;
+  width: 300px;
+}
+
+.movieSpecs {
+  text-align: left;
+}
+
+.backToSearchButton {
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+  width: 127px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #112d4e;
+  padding: 0.5em;
+  border: 1px solid #dbe2ef;
+  border-radius: 0.4em;
+}
+
+.backToSearchButton a {
+  text-decoration: none;
+  color: #f9f7f7;
+}
+
+.detailsError {
+  text-align: center;
+  margin-top: 2em;
+}
+
+/*******************************************************************
+************************ CSS MEDIA QUERIES *************************
+*******************************************************************/
+
+@media only screen and (max-width: 1300px) {
+  .movieDetails {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .movieDetails {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .movieDetails {
+    width: 80%;
+  }
+
+  .movieDetails img {
+    height: 100%;
+    width: 200px;
+  }
+}

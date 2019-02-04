@@ -1,6 +1,7 @@
 import React from "react";
-
 import {Link} from "react-router-dom";
+
+import "../CSS/Movies.css";
 
 const Movies = (props) => (
     <div className="moviesDiv">
@@ -15,7 +16,9 @@ const Movies = (props) => (
                     <div className="detailsButton">
                         <Link to={{
                             pathname: `/details/${movie.imdbID}`,
-                            state: {movieDetails: movie.Title} }}>
+                            state: {
+                                movieDetails: movie.Title
+                            } }}>
                             View Details
                         </Link>
                     </div>

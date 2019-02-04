@@ -1,0 +1,54 @@
+.moviesDiv {
+  text-align: left;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+span {
+  font-weight: bold;
+}
+
+.movieCards {
+  margin: 2em 1em;
+  width: 220px;
+  height: 450px;
+  background-color: #dbe2ef;
+  color: #112d4e;
+}
+
+.movieCards img {
+  width: 100%;
+  height: 280px;
+}
+
+.titles {
+  margin-left: 0.8em;
+  margin-right: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.detailsButton {
+  margin-top: 1em;
+  margin-left: 0.8em;
+  margin-bottom: 0.8em;
+  width: 105px;
+  background-color: #112d4e;
+  padding: 0.5em;
+  border-radius: 0.4em;
+}
+
+.detailsButton a {
+  text-decoration: none;
+  color: #f9f7f7;
+}
+
+.imageNA {
+  height: 280px;
+  margin-top: 0px;
+}

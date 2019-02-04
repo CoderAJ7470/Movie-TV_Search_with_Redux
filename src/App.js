@@ -1,40 +1,18 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import Form from "./Components/Form";
 import Movies from "./Components/Movies";
+import Pagination from './Components/Pagination';
 
-const API_KEY = "a7d348df";
+import "./CSS/Main.css";
+
 
 class App extends Component {
   state = {
     movies: [],
-    totalMoviesReturned: undefined,
+    totalResults: undefined,
+    searchString: undefined,
     error: undefined
-  }
-
-  getMovies = async (e) => {
-    let movieTitle = e.target.elements.title.value;
-
-    e.preventDefault();
-
-    const api_call = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${movieTitle}&page=1`);
-    const data = await api_call.json();
-
-    if(data.Error) {
-      this.setState({
-        movies: [],
-        totalMoviesReturned: undefined,
-        error: "Nothing found with given keyword. Please check your keyword and try again."
-      });
-    }
-    else {
-      this.setState({
-        movies: data.Search,
-        totalMoviesReturned: data.totalResults,
-        error: ""
-      });
-    }
   }
 
   componentDidMount = () => {
@@ -43,7 +21,7 @@ class App extends Component {
     this.setState({movies: movieResults});
   }
 
-  // Sets the local storage when the user clicks the "Get Results" button;
+  // Sets the session storage when the user clicks the "Get Results" button;
   // Converts the data coming from the API to one long, continous string
   // which is then stored locally for quick access
   componentDidUpdate = () => {
@@ -51,14 +29,48 @@ class App extends Component {
     sessionStorage.setItem("results", movieString);
   }
 
+  populateResults = (results) => {
+    if(results.Error) {
+      this.setState({
+          movies: [],
+          totalResults: undefined,
+          error: "No results were returned with the given keyword. Please ensure you have entered valid input."
+        });
+    }
+    else {
+      this.setState(
+        {
+          movies: results.Search,
+          totalResults: results.totalResults,
+          error: ""
+        }
+      );
+    }
+  }
+
+  passSearchString = (searchString) => {
+    this.setState({
+      searchString: searchString
+    })
+  }
+
   render() {
     return (
       <div>
-        <Form getMovies = {this.getMovies} />
+        <Form
+          populateResults = {this.populateResults}
+          passSearchString = {this.passSearchString}/>
         <Movies
           movies = {this.state.movies}
           error = {this.state.error}
         />
+        {this.state.movies ?
+        <Pagination 
+          totalResults = {this.state.totalResults}
+          populateResults = {this.populateResults}
+          searchString = {this.state.searchString}
+        /> :
+        null}
       </div>
     );
   }
