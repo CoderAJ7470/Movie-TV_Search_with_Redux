@@ -11,7 +11,7 @@ export default class Pagination extends Component {
 
       this.state = {
         totalPages: "",
-        currentPage: ""
+        currentPage: 1
       }
   }
 
@@ -49,17 +49,20 @@ export default class Pagination extends Component {
   componentDidMount = () => {
     console.log("I got called");
     this.setState({
-      totalPages: this.getTotalPages(),
-      currentPage: 1
+      // totalPages: this.getTotalPages(),
+      // currentPage: 1
     })
   }
 
   render() {
     return(
       <div className="pagination">
-        <p>Viewing page {this.state.currentPage} of {this.state.totalPages}</p>
-        <button disabled={this.decrementButtonDisabled()} onClick={this.decrementPage}>Previous Page</button>
-        <button disabled={this.incrementButtonDisabled()} onClick={this.incrementPage}>Next Page</button>
+        {this.props.totalResults > 0 ? <p>Viewing page {this.state.currentPage} of {this.getTotalPages()};
+          Total Results: {this.props.totalResults}</p> : null }
+        {this.props.totalResults > 10 ?
+        <><button disabled={this.decrementButtonDisabled()} onClick={this.decrementPage}>Previous Page</button>
+          <button disabled={this.incrementButtonDisabled()} onClick={this.incrementPage}>Next Page</button></> :
+        null}
       </div>
     );
   }

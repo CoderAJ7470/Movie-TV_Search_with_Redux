@@ -64,13 +64,11 @@ class App extends Component {
           movies = {this.state.movies}
           error = {this.state.error}
         />
-        {this.state.movies ?
         <Pagination 
           totalResults = {this.state.totalResults}
           populateResults = {this.populateResults}
           searchString = {this.state.searchString}
-        /> :
-        null}
+        />
       </div>
     );
   }
