@@ -5,7 +5,9 @@ import "../CSS/Movies.css";
 
 const Movies = (props) => (
     <div className="moviesDiv">
-        {props.movies && props.movies.map((movie) => {
+        {console.log("Props to you!",props)}
+        {props.results && props.results.map((movie) => {
+            console.log("Got results: ", props.results);
             return(
                 <div key={movie.imdbID} className="movieCards">
                     {movie.Poster !== "N/A" ? 

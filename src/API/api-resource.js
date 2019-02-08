@@ -1,8 +1,10 @@
 const API_KEY = "a7d348df";
 
 export const API = {
-  getMovies = async (keyword, page = 1) => {    
-    const api_call = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${keyword}&${page}`);
+  getMovies: async (keyword, pageNumber = 1) => {    
+    const api_call = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${keyword}&page=${pageNumber}`);
     const data = await api_call.json();
+
+    return data;
   }
 }
