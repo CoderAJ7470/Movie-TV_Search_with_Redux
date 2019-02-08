@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import Movies from "../Movies";
+import {withRouter} from "react-router-dom";
 
 function mapStateToProps(state) {
   return {
@@ -8,7 +9,9 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
+export default withRouter(
+  connect(
+    mapStateToProps
+  )
+  (Movies)
 )
-(Movies);

@@ -5,12 +5,14 @@ import App from "../App";
 import Details from "./Details";
 
 const Router = () => (
-    <BrowserRouter>
+    // <BrowserRouter>
+    <>
         <Switch>
             <Route path="/" component={App} exact />
             <Route path="/details/:id" component={Details} />
         </Switch>
-    </BrowserRouter>
+    </>
+    // </BrowserRouter>
 );
 
 export default Router;
