@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 import "../CSS/Details.css";
 import "../Images/NotAvailable.png";
@@ -25,37 +24,54 @@ class Details extends Component {
     error: undefined
   };
 
-  componentDidMount = () => {};
+  componentDidMount = async () => {
+    let movieTitle = this.props.location.state.movieDetails;
 
-  remapMovieKeys = details => ({
-    poster: details.Poster,
-    title: details.Title,
-    releaseYear: details.Year,
-    actors: details.Actors,
-    plot: details.Plot,
-    directedBy: details.Director,
-    writtenBy: details.Writer,
-    genre: details.Genre,
-    dvdRelease: details.DVD,
-    productionHouse: details.Production,
-    rating: details.Rated,
-    error: ""
-  });
+    const apiRequest = await fetch(
+      `https://www.omdbapi.com/?apikey=${API_KEY}&t=${movieTitle}`
+    );
 
-  getCurrentMovie = () => {
-    const currentImdbId = this.props.match.params.id;
-    console.log(this.props);
-    const currentMovie =
-      this.props.results.find(result => result.imdbID === currentImdbId) || {};
-    console.log(currentMovie);
-    const remappedMovie = this.remapMovieKeys(currentMovie);
-    return remappedMovie;
+    const details = await apiRequest.json();
+
+    console.log(details);
+
+    if (details.Error) {
+      this.setState({
+        poster: undefined,
+        title: undefined,
+        releaseYear: undefined,
+        actors: undefined,
+        plot: undefined,
+        directedBy: undefined,
+        writtenBy: undefined,
+        genre: undefined,
+        dvdRelease: undefined,
+        productionHouse: undefined,
+        rating: undefined,
+        error:
+          "We're sorry, but unfortunately movie details are not available for " +
+          "your selection."
+      });
+    } else {
+      this.setState({
+        poster: details.Poster,
+        title: details.Title,
+        releaseYear: details.Year,
+        actors: details.Actors,
+        plot: details.Plot,
+        directedBy: details.Director,
+        writtenBy: details.Writer,
+        genre: details.Genre,
+        dvdRelease: details.DVD,
+        productionHouse: details.Production,
+        rating: details.Rated,
+        error: ""
+      });
+    }
   };
 
   render() {
-    console.log("inside render function, props are: ", this.props);
-    console.log("current movie is: ", this.getCurrentMovie());
-    const movieSpecifics = this.getCurrentMovie();
+    const movieSpecifics = this.state;
 
     if (movieSpecifics.error) {
       return (
@@ -125,9 +141,4 @@ class Details extends Component {
   }
 }
 
-export default connect(
-  state => (
-    console.log(state.search.results, " are results "),
-    { results: state.search.results }
-  )
-)(Details);
+export default Details;
