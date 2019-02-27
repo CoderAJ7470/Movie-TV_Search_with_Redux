@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import addToFavorites from "./Favorites/favorites-processor";
 import "../CSS/Details.css";
-import "../Images/NotAvailable.png";
 
 const notAvailableImage = require("../Images/NotAvailable.png");
 
@@ -33,7 +33,7 @@ class Details extends Component {
 
     const details = await apiRequest.json();
 
-    console.log(details);
+    // console.log(details);
 
     if (details.Error) {
       this.setState({
@@ -100,40 +100,25 @@ class Details extends Component {
               )}
             </div>
             <div className="movieSpecs">
-              <p>
-                <strong>Title:</strong> {movieSpecifics.title}
-              </p>
-              <p>
-                <strong>Released:</strong> {movieSpecifics.releaseYear}
-              </p>
-              <p>
-                <strong>Actors:</strong> {movieSpecifics.actors}
-              </p>
-              <p>
-                <strong>Plot:</strong> {movieSpecifics.plot}
-              </p>
-              <p>
-                <strong>Directed By:</strong> {movieSpecifics.directedBy}
-              </p>
-              <p>
-                <strong>Written By:</strong> {movieSpecifics.writtenBy}
-              </p>
-              <p>
-                <strong>Genre:</strong> {movieSpecifics.genre}
-              </p>
-              <p>
-                <strong>DVD Release:</strong> {movieSpecifics.dvdRelease}
-              </p>
-              <p>
-                <strong>Production:</strong> {movieSpecifics.productionHouse}
-              </p>
-              <p>
-                <strong>Rating:</strong> {movieSpecifics.rating}
-              </p>
+              <p><strong>Title:</strong> {movieSpecifics.title}</p>
+              <p><strong>Released:</strong> {movieSpecifics.releaseYear}</p>
+              <p><strong>Actors:</strong> {movieSpecifics.actors}</p>
+              <p><strong>Plot:</strong> {movieSpecifics.plot}</p>
+              <p><strong>Directed By:</strong> {movieSpecifics.directedBy}</p>
+              <p><strong>Written By:</strong> {movieSpecifics.writtenBy}</p>
+              <p><strong>Genre:</strong> {movieSpecifics.genre}</p>
+              <p><strong>DVD Release:</strong> {movieSpecifics.dvdRelease}</p>
+              <p><strong>Production:</strong> {movieSpecifics.productionHouse}</p>
+              <p><strong>Rating:</strong> {movieSpecifics.rating}</p>
             </div>
           </div>
-          <div className="backToSearchButton">
-            <Link to={{ pathname: "/" }}>Back to Search</Link>
+          <div className="functionButtons">
+            <div className="backToSearchButton">
+              <Link to={{ pathname: "/" }}>Back to Search</Link>
+            </div>
+            <div className="addToFavoritesButton">
+              <Link onClick={() => addToFavorites(movieSpecifics)} to={{ pathname: "/favorites" }}>Add to My Favorites</Link>
+            </div>
           </div>
         </div>
       );

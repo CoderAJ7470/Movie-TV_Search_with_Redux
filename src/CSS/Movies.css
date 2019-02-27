@@ -52,3 +52,10 @@ span {
   height: 280px;
   margin-top: 0px;
 }
+
+.error {
+  color: rgb(150, 20, 20);
+  background-color: #f9f7f7;
+  padding: 0.3em;
+  border-radius: 0.5em;
+}

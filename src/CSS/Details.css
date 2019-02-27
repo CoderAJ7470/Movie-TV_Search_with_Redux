@@ -25,10 +25,32 @@
   text-align: left;
 }
 
+.functionButtons {
+  text-align: center;
+}
+
 .backToSearchButton {
+  display: inline-block;
   margin-top: 2em;
   margin-bottom: 0.8em;
   width: 127px;
+  margin-right: 1em;;
+  background-color: #112d4e;
+  padding: 0.5em;
+  border: 1px solid #dbe2ef;
+  border-radius: 0.4em;
+}
+
+.backToSearchButton a {
+  text-decoration: none;
+  color: #f9f7f7;
+}
+
+.addToFavoritesButton {
+  display: inline-block;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+  width: 170px;
   margin-left: auto;
   margin-right: auto;
   background-color: #112d4e;
@@ -37,7 +59,7 @@
   border-radius: 0.4em;
 }
 
-.backToSearchButton a {
+.addToFavoritesButton a {
   text-decoration: none;
   color: #f9f7f7;
 }

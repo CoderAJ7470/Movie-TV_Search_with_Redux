@@ -7,17 +7,19 @@ export const SearchActions = {
 }
 
 // payload is the data that is associated with each action in this action creator
-export function submitSearch(queryString) {
+export function submitSearch(queryString, pageNumber = null) {
   return {
     type: SearchActions.SUBMIT_SEARCH,
     payload: {
-      queryString
+      queryString,
+      pageNumber
     }
   };
 }
 
 // payload is the data that is associated with each action in this action creator
 export function populateResults(response) {
+  console.log("The response is", response);
   return {
     type: SearchActions.POPULATE_RESULTS,
     payload: {
@@ -26,21 +28,29 @@ export function populateResults(response) {
   };
 }
 
-export function throwError() {
-  return {
-    type: SearchActions.ERROR,
-    payload: {
-      error: "No results were returned with the given keyword. Please ensure you have entered valid input."
-    }
-  }
-}
+// export function throwError() {
+//   return {
+//     type: SearchActions.ERROR,
+//     payload: {
+//       error: "No results were returned with the given keyword. Please ensure you have entered valid input."
+//     }
+//   }
+// }
 
-export const submitSearchThunk = queryString => dispatch => {
+export const submitSearchThunk = (queryString) => dispatch => {
   dispatch(submitSearch(queryString));
 
   API.getMovies(queryString)
   .then(results =>
-    dispatch(populateResults(results)))
-  .catch(() =>
-    dispatch(throwError()));
+    dispatch(populateResults(results)));
+}
+
+export const submitPageThunk = (queryString, pageNumber) => dispatch => {
+  dispatch(submitSearch(queryString, pageNumber));
+
+  // console.log("The page number is: " + pageNumber);
+
+  API.getMovies(queryString, pageNumber)
+  .then(results =>
+    dispatch(populateResults(results)));
 }

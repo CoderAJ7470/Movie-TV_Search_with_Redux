@@ -2,12 +2,7 @@ import React, { Component } from "react";
 
 import Form from "./Components/Search/search-processor";
 import Movies from "./Components/Search/search-results-processor";
-import Pagination from "./Components/Pagination";
-
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./store";
-import { connect } from "react-redux";
+import Pagination from "./Components/Search/pagination-processor";
 
 import "./CSS/Main.css";
 
@@ -21,6 +16,7 @@ class App extends Component {
       <>
         <Form />
         <Movies />
+        <Pagination />
       </>
     );
   }

@@ -3,67 +3,66 @@ import React, {Component} from "react";
 import "../CSS/Pagination.css";
 
 const RESULTS_PER_PAGE = 10;
-const API_KEY = "a7d348df";
 
-export default class Pagination extends Component {
+class Pagination extends Component {
   constructor(props) {
     super(props);
 
-      this.state = {
-        totalPages: "",
-        currentPage: 1
-      }
-  }
-
-  getMovies = async () => {    
-    const api_call = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${this.props.searchString}&page=${this.state.currentPage}`);
-    const data = await api_call.json();
-
-    this.props.populateResults(data);
+    this.state = {
+      totalPages: ""
+    }
   }
 
   incrementPage = () => {
-    this.setState({
-      currentPage: this.state.currentPage + 1
-    }, this.getMovies)
+    this.props.getResultsByPage(this.props.keyword, this.props.currentPage + 1);
   }
 
   decrementPage = () => {
-    this.setState({
-      currentPage: this.state.currentPage - 1
-    }, this.getMovies)
+    this.props.getResultsByPage(this.props.keyword, this.props.currentPage - 1);
+  }
+
+  // This is called after the "Next" or "Prev" buttons are clicked. Clicking either button
+  // calls the incrementPage() or decrementPage() functions, the state updates then
+  // componentDidUpdate() is called by React to update the component, which in turn calls
+  // the window scrollTo(...) function
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
   }
 
   incrementButtonDisabled() {
-    return this.state.currentPage === this.getTotalPages();
+    return this.props.currentPage === this.getTotalPages();
   }
 
   decrementButtonDisabled() {
-    return this.state.currentPage === 1;
-  }
+    return this.props.currentPage === 1;
+}
 
   getTotalPages() {
     return Math.ceil(this.props.totalResults/RESULTS_PER_PAGE);
   }
 
-  componentDidMount = () => {
-    console.log("I got called");
-    this.setState({
-      // totalPages: this.getTotalPages(),
-      // currentPage: 1
-    })
-  }
-
   render() {
-    return(
-      <div className="pagination">
-        {this.props.totalResults > 0 ? <p>Viewing page {this.state.currentPage} of {this.getTotalPages()};
-          Total Results: {this.props.totalResults}</p> : null }
-        {this.props.totalResults > 10 ?
-        <><button disabled={this.decrementButtonDisabled()} onClick={this.decrementPage}>Previous Page</button>
-          <button disabled={this.incrementButtonDisabled()} onClick={this.incrementPage}>Next Page</button></> :
-        null}
-      </div>
+    const totalResults = this.props.totalResults;
+    return (
+      <>
+        {totalResults > 0 ?
+          totalResults < 10 ?
+          <div className="pagination">
+          <p>Your search returned {totalResults} results | Showing page {this.props.currentPage} of {this.getTotalPages()}</p></div> :
+          <div className="pagination">
+            <p>
+            Your search returned {totalResults} results | Showing page {this.props.currentPage} of {this.getTotalPages()} | 
+            You can browse all results by using the "Prev" and "Next" buttons below.</p>
+            <div>
+              <button disabled={this.decrementButtonDisabled()} onClick={this.decrementPage}>Prev</button>
+              <button disabled={this.incrementButtonDisabled()} onClick={this.incrementPage}>Next</button>
+            </div>
+          </div> :
+          null
+        }
+      </>
     );
   }
 }
+
+export default Pagination;

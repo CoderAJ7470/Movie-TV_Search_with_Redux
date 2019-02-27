@@ -7,7 +7,7 @@ class Form extends Component {
         super(props);
 
         this.state = {
-            keyword: ""
+            keyword: "",
         }
     }
 
@@ -32,9 +32,9 @@ class Form extends Component {
 
         this.props.submitSearch(this.state.keyword);
 
-        // this.setState (
-        //     {keyword: "" }
-        // );
+        this.setState (
+            {keyword: "" }
+        );
     }
 
     render() {

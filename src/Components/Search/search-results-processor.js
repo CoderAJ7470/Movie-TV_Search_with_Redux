@@ -1,12 +1,14 @@
 import { connect } from "react-redux";
 import Movies from "../Movies";
-import { withRouter } from "react-router-dom";
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     error: state.search.error,
     results: state.search.results
   };
 }
 
-export default withRouter(connect(mapStateToProps)(Movies));
+export default connect(
+  mapStateToProps
+)(Movies)

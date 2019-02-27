@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 const rootReducer = combineReducers({
   search: searchReducer
 });
-// console.log("Results: " + this.search);
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
